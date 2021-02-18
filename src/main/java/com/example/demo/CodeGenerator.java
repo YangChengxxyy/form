@@ -19,15 +19,10 @@ import java.util.Scanner;
 
 @Component
 public class CodeGenerator {
+    public static void main(String[] args) {
+        generate(args);
+    }
 
-    @Value("${spring.datasource.url}")
-    public String URL;
-    @Value("${spring.datasource.username}")
-    public String USERNAME;
-    @Value("${spring.datasource.password}")
-    public String PASSWORD;
-    @Value("${spring.datasource.driver-class-name}")
-    public String DRIVE_CLASS_NAME;
     /**
      * <p>
      * 读取控制台内容
@@ -45,9 +40,8 @@ public class CodeGenerator {
         throw new MybatisPlusException("请输入正确的" + tip + "！");
     }
 
-    public void generate(String[] args) {
+    public static void generate(String[] args) {
         // 代码生成器
-        System.out.println(URL);
         AutoGenerator mpg = new AutoGenerator();
 
         // 全局配置
@@ -61,10 +55,10 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl(URL);
-        dsc.setDriverName(DRIVE_CLASS_NAME);
-        dsc.setUsername(USERNAME);
-        dsc.setPassword(PASSWORD);
+        dsc.setUrl("jdbc:mysql://localhost:3306/form?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8");
+        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setUsername("root");
+        dsc.setPassword("yangcheng8533");
         mpg.setDataSource(dsc);
 
         // 包配置
